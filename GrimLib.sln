@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrimLib", "GrimLib\GrimLib.csproj", "{C23D83D1-930A-4B2C-B05E-08B6CCF96DD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrimLib.Tests", "GrimLib.Tests\GrimLib.Tests.csproj", "{716E8157-F620-449A-B16E-2C884FA72BF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C23D83D1-930A-4B2C-B05E-08B6CCF96DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C23D83D1-930A-4B2C-B05E-08B6CCF96DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C23D83D1-930A-4B2C-B05E-08B6CCF96DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C23D83D1-930A-4B2C-B05E-08B6CCF96DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{716E8157-F620-449A-B16E-2C884FA72BF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{716E8157-F620-449A-B16E-2C884FA72BF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{716E8157-F620-449A-B16E-2C884FA72BF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{716E8157-F620-449A-B16E-2C884FA72BF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C182B931-DB7A-4ADD-A4F2-9ABEDD0D23FA}
+	EndGlobalSection
+EndGlobal
