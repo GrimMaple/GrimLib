@@ -23,6 +23,9 @@ namespace GrimLib.Tests.Util
         [Option]
         public bool SomeFlag { get; set; }
 
+        [Option("SomeRandName")]
+        public int SomeInt { get; set; }
+
         public TestConfiguration(bool empty = false)
         {
             if (empty)
@@ -33,6 +36,7 @@ namespace GrimLib.Tests.Util
             SomeFloat = 3.1415f;
             SomeDouble = 2.71;
             SomeFlag = true;
+            SomeInt = 1337;
         }
 
         public int CompareTo(object obj)
@@ -46,6 +50,7 @@ namespace GrimLib.Tests.Util
             result &= SomeFloat == t.SomeFloat;
             result &= SomeDouble == t.SomeDouble;
             result &= SomeFlag == t.SomeFlag;
+            result &= SomeInt == t.SomeInt;
             return result ? 1 : -1;
         }
     }

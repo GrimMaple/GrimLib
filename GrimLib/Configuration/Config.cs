@@ -8,10 +8,35 @@ namespace GrimLib.Configuration
 {
     public class Config
     {
+        private PropertyInfo FindByAttrName(string name)
+        {
+            PropertyInfo[] infos = GetType().GetProperties();
+            for(int i=0; i<infos.Length; i++)
+            {
+                OptionAttribute attr = infos[i].GetCustomAttribute<OptionAttribute>();
+                if (attr == null)
+                    continue;
+                if (attr.Name == name)
+                    return infos[i];
+            }
+
+            return null;
+        }
+
         private void SetOwnValue(string name, string val)
         {
             Type[] accepted = { typeof(int), typeof(long), typeof(float), typeof(double), typeof(string), typeof(bool) };
             PropertyInfo inf = GetType().GetRuntimeProperty(name);
+
+            if(inf == null)
+            {
+                inf = FindByAttrName(name);
+            }
+
+
+            if (inf == null)
+                return;
+
             int t = Array.IndexOf(accepted, inf.PropertyType);
             switch (t)
             {
@@ -65,10 +90,12 @@ namespace GrimLib.Configuration
 
             foreach(PropertyInfo info in infos)
             {
-                Attribute attr = info.GetCustomAttribute<OptionAttribute>();
+                OptionAttribute attr = info.GetCustomAttribute<OptionAttribute>();
                 if (attr == null)
                     continue;
                 string name = info.Name;
+                if (attr.Name != null)
+                    name = attr.Name;
                 if (info.GetValue(this) == null)
                     continue;
                 string value;

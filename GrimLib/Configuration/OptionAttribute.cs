@@ -8,5 +8,16 @@ namespace GrimLib.Configuration
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
     public class OptionAttribute : Attribute
     {
+        public string Name { get; set; }
+
+        public OptionAttribute()
+        {
+            Name = null;
+        }
+
+        public OptionAttribute(string name)
+        {
+            Name = name;
+        }
     }
 }
