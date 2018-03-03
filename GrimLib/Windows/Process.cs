@@ -108,36 +108,63 @@ namespace GrimLib.Windows
 
         #region Data getters within game memory
 
-        public byte[] ReadMemory(int address, int size, ref int dataRead)
+        private bool TryRead(int address, int size, byte[] data, ref int read)
         {
-            try
+            if (!IsOpen)
+                return false;
+            bool result = ReadProcessMemory((int)gameProcessHandle, address, data, size, ref read);
+            return result;
+        }
+
+        public bool TryReadMemory(int address, int size, byte[] data)
+        {
+            int read = 0;
+            return TryRead(address, size, data, ref read);
+        }
+
+        public byte[] ReadMemory(int address, int size)
+        {
+            int read = 0;
+            byte[] data = new byte[size];
+            if(TryRead(address, size, data, ref read))
             {
-                byte[] data = new byte[size];
-                ReadProcessMemory((int)gameProcessHandle, address, data, size, ref dataRead);
+                if (read < size)
+                    throw new Exception("Memory read error");
+
                 return data;
             }
-            catch
-            {
-                isOpen = false;
-                OpenProcess();
-                return null;
-            }
+
+            throw new Exception("Memory read error");
         }
 
         public int ReadInt32(int address)
         {
-            int read = 0;
-            byte[] data = new byte[4];
-            ReadProcessMemory((int)gameProcessHandle, address, data, 4, ref read);
-            return BitConverter.ToInt32(data, 0);
+            return BitConverter.ToInt32(ReadMemory(address, 4), 0);
         }
 
         public float ReadFloat(int address)
         {
-            int read = 0;
-            byte[] data = new byte[4];
-            ReadProcessMemory((int)gameProcessHandle, address, data, 4, ref read);
-            return BitConverter.ToSingle(data, 0);
+            return BitConverter.ToSingle(ReadMemory(address, 4), 0);
+        }
+
+        public double ReadDouble(int address)
+        {
+            return BitConverter.ToDouble(ReadMemory(address, 8), 0);
+        }
+
+        public short ReadInt16(int address)
+        {
+            return BitConverter.ToInt16(ReadMemory(address, 2), 0);
+        }
+
+        public byte ReadByte(int address)
+        {
+            return ReadMemory(address, 1)[0];
+        }
+
+        public long ReadInt64(int address)
+        {
+            return BitConverter.ToInt32(ReadMemory(address, 8), 0);
         }
 
         public int ReadInt32Path(int baseAddr, params int[] offset)
